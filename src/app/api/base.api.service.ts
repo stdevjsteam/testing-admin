@@ -10,6 +10,7 @@ export default abstract class BaseApiService<T> {
     this.db.list(this.url).push(instance);
   }
   getAll() {
+    // return this.db.object(this.url).valueChanges();
     return this.db.list(this.url).valueChanges();
   }
 }

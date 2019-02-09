@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of internUsers">
+      <tr *ngFor="let user of internUsers | async">
         <td>{{user.firstName}}</td>
         <td>{{user.lastName}}</td>
         <td>{{user.email}}</td>
