@@ -7,6 +7,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
+import { ResultSinglePageComponent } from './components/result-single-page/result-single-page.component';
+import { TestResultComponent } from './components/test-result/test-result.component';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import {AngularFireModule} from '@angular/fire';
     AngularFireModule.initializeApp(environment.firebase)
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    ResultSinglePageComponent,
+    TestResultComponent
   ],
   bootstrap: [AppComponent]
 })

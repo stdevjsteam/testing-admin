@@ -1,26 +1,2 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to Admin!
-  </h1>
-</div>
-<div>
-  <table border="1px" *ngIf="internUsers">
-    <thead>
-      <tr>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of internUsers | async">
-        <td>{{user.firstName}}</td>
-        <td>{{user.lastName}}</td>
-        <td>{{user.email}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
 <router-outlet></router-outlet>

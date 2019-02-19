@@ -1,0 +1,16 @@
+<div>
+  <ol>
+    <li *ngFor="let item of userQuestionAnswers">
+      <p [ngStyle]="{'color': item.userAnswer ? 'black' : 'red'}">{{item.question}}</p>
+      <p *ngIf="!item.userAnswer" style="margin-left: 20px; color: red;">User has not answered</p>
+      <ol style="padding-left: 40px;">
+        <li *ngFor="let answer of item.answers">
+          <span [ngStyle]="{'color':
+            item.userAnswer === item.rightAnswer && item.userAnswer === answer.key || (item.userAnswer !== item.rightAnswer && answer.key === item.rightAnswer) ? 'green' :
+            item.userAnswer !== rightAnswer && item.userAnswer === answer.key ? 'red' :
+            'black'}">{{ answer.answer }}</span>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</div>

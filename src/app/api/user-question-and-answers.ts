@@ -8,7 +8,7 @@ const url = 'questionsAnswers';
   'providedIn': 'root'
 })
 export class UserQuestionAndAnswers extends BaseApiService<UserQuestionAnswerModel> {
-  constructor(public db: AngularFireDatabase) {
+  constructor(public db: AngularFireDatabase,) {
     super(db, url);
   }
 }

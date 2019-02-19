@@ -1,0 +1,27 @@
+<div style="text-align:center">
+  <h1>
+    Welcome to Admin!
+  </h1>
+</div>
+<div>
+  <table border="1px" *ngIf="testResult" align="center">
+    <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>email</th>
+      <th>result</th>
+      <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let result of testResult">
+      <td>{{result.user.firstName}}</td>
+      <td>{{result.user.lastName}}</td>
+      <td>{{result.user.email}}</td>
+      <td>{{result.testResult.userAllRightAnswers}} of {{result.testResult.questionCount}}</td>
+      <td><a [routerLink]="['test-result', result.testResult.userId]">View</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
