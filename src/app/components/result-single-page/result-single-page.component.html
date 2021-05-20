@@ -1,4 +1,7 @@
 <div>
+	<div>
+		<a routerLink="">Back to all results</a>
+	</div>
   <ol>
     <li *ngFor="let item of userQuestionAnswers">
       <p [ngStyle]="{'color': item.userAnswer ? 'black' : 'red'}">{{item.question}}</p>
