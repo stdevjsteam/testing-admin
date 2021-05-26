@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let result of testResult"
-        [style.backgroundColor]="result.testResult.userAllRightAnswers >= 25 ? '#15CB15' : '#FD3434'"
+        [style.backgroundColor]="result.testResult.userAllRightAnswers >= 33 ? '#15CB15' : '#FD3434'"
         [style.opacity]="!!checkbox[result.testResult.userId]? 0.4: 1"
     >
       <td><input type="checkbox" [checked]="!!checkbox[result.testResult.userId]" (change)="onCheckClicked(result.testResult.userId,$event)"/></td>
