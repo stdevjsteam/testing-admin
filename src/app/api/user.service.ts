@@ -15,11 +15,17 @@ export class UserService extends BaseApiService<UserModel> {
 
 
   cratePass() {
-// db: AngularFireDatabase
+    // db: AngularFireDatabase
     const itemRef = this.db.object('security');
 
-// set() for destructive updates
+    // set() for destructive updates
     console.log('angular', 'angular');
     itemRef.set({ password: 'angular'});
+  }
+
+  updateUserStatus(userId, status: boolean) {
+    return this.db.object(url + `/${userId}`).update({
+      isRejected: status,
+    });
   }
 }

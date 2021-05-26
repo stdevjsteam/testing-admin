@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserQuestionAndAnswers} from '../../api/user-question-and-answers';
 import {UserService} from '../../api/user.service';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-test-result',
@@ -12,7 +12,9 @@ export class TestResultComponent implements OnInit {
 
   private internUsers;
   private userTestResult;
+  public checkbox: { [key: string]: boolean } = {};
   testResult = [];
+
   constructor(private userService: UserService,
               private router: Router,
               private userQuestionAndAnswers: UserQuestionAndAnswers) {
@@ -33,15 +35,33 @@ export class TestResultComponent implements OnInit {
       this.setUserInfo();
     });
   }
+
   private setUserInfo(): void {
     if (this.internUsers && this.userTestResult) {
+      this.testResult = [];
       for (const item in this.userTestResult) {
         this.userTestResult[item].questionCount = this.userTestResult[item].userQuestionAnswers.length;
         this.testResult.push({
           testResult: this.userTestResult[item],
           user: this.internUsers[this.userTestResult[item].userId]
         });
+        this.checkbox[this.userTestResult[item].userId] = !!this.internUsers[this.userTestResult[item].userId].isRejected;
       }
     }
+  }
+
+  public onCheckClicked(userId, event): void {
+    const value = event.target.checked;
+    event.target.checked = !event.target.checked;
+    this.userService.updateUserStatus(userId, value)
+      .then(
+        res => {
+          this.checkbox[userId] = value;
+          event.target.checked = value;
+        },
+      ).catch(err => {
+      this.checkbox[userId] = !value;
+      event.target.checked = !value;
+    });
   }
 }

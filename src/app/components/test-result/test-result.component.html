@@ -7,18 +7,25 @@
   <table border="1px" *ngIf="testResult" align="center">
     <thead>
     <tr>
+      <th>Deny</th>
       <th>First name</th>
       <th>Last name</th>
       <th>email</th>
+      <th>duration</th>
       <th>result</th>
       <th>View</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let result of testResult">
+    <tr *ngFor="let result of testResult"
+        [style.backgroundColor]="result.testResult.userAllRightAnswers >= 25 ? '#15CB15' : '#FD3434'"
+        [style.opacity]="!!checkbox[result.testResult.userId]? 0.4: 1"
+    >
+      <td><input type="checkbox" [checked]="!!checkbox[result.testResult.userId]" (change)="onCheckClicked(result.testResult.userId,$event)"/></td>
       <td>{{result.user.firstName}}</td>
       <td>{{result.user.lastName}}</td>
       <td>{{result.user.email}}</td>
+      <td>{{((result.testResult.endDate - result.testResult.startDate) / 60000) | number: '1.1-1'}}</td>
       <td>{{result.testResult.userAllRightAnswers}} of {{result.testResult.questionCount}}</td>
       <td><a [routerLink]="['test-result', result.testResult.userId]">View</a></td>
     </tr>
