@@ -1,0 +1,31 @@
+<div>
+  <div>
+    <a routerLink="">Back to all results</a>
+  </div>
+  <table border="1px" *ngIf="questionStats" align="center">
+    <thead>
+    <tr>
+      <th>Question</th>
+      <th>Percentage</th>
+    </tr>
+    </thead>
+    <tbody>
+<!--    <tr *ngFor="let result of testResult | sort: this.sortValue"-->
+<!--        [style.backgroundColor]="result.testResult.userAllRightAnswers >= 33 ? '#15CB15' : '#FD3434'"-->
+<!--        [style.opacity]="!!checkbox[result.testResult.userId]? 0.4: 1"-->
+<!--    >-->
+<!--      <td><input type="checkbox" [checked]="!!checkbox[result.testResult.userId]" (change)="onCheckClicked(result.testResult.userId,$event)"/></td>-->
+<!--      <td>{{result.user.firstName}}</td>-->
+<!--      <td>{{result.user.lastName}}</td>-->
+<!--      <td>{{result.user.email}}</td>-->
+<!--      <td>{{result.testResult.duration}}</td>-->
+<!--      <td>{{result.testResult.userAllRightAnswers}} of {{result.testResult.questionCount}}</td>-->
+<!--      <td><a [routerLink]="['test-result', result.testResult.userId]">View</a></td>-->
+<!--    </tr>-->
+    <tr *ngFor="let stat of questionStats; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{stat | number: '1.1-1'}}%</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

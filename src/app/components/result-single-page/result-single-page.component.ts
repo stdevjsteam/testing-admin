@@ -17,7 +17,6 @@ export class ResultSinglePageComponent {
       this.userQuestionAndAnswers.getByKey(params.id).valueChanges().subscribe(res => {
         this.userTestResult = res[0];
         this.userQuestionAnswers = this.userTestResult.userQuestionAnswers;
-        console.log(this.userTestResult.userQuestionAnswers);
       });
     }) ;
   }

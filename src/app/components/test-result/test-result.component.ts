@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-test-result',
   templateUrl: './test-result.component.html',
-  styleUrls: ['./test-result.component.scss']
+  styleUrls: ['./test-result.component.scss'],
 })
 export class TestResultComponent implements OnInit {
 
@@ -14,6 +14,7 @@ export class TestResultComponent implements OnInit {
   private userTestResult;
   public checkbox: { [key: string]: boolean } = {};
   testResult = [];
+  sortValue = '';
 
   constructor(private userService: UserService,
               private router: Router,
@@ -42,7 +43,10 @@ export class TestResultComponent implements OnInit {
       for (const item in this.userTestResult) {
         this.userTestResult[item].questionCount = this.userTestResult[item].userQuestionAnswers.length;
         this.testResult.push({
-          testResult: this.userTestResult[item],
+          testResult: {
+            ...this.userTestResult[item],
+            duration: Math.round((this.userTestResult[item].endDate - this.userTestResult[item].startDate) / 60000),
+          },
           user: this.internUsers[this.userTestResult[item].userId]
         });
         this.checkbox[this.userTestResult[item].userId] = !!this.internUsers[this.userTestResult[item].userId].isRejected;
@@ -63,5 +67,9 @@ export class TestResultComponent implements OnInit {
       this.checkbox[userId] = !value;
       event.target.checked = !value;
     });
+  }
+
+  public setSortValue(value): void {
+    this.sortValue = value;
   }
 }

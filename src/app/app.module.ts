@@ -9,6 +9,8 @@ import { environment } from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import { ResultSinglePageComponent } from './components/result-single-page/result-single-page.component';
 import { TestResultComponent } from './components/test-result/test-result.component';
+import {ArraySortPipe} from "./pipes/arraySort.pipe";
+import {QuestionStatsComponent} from "./components/question-stats/question-stats.component";
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import { TestResultComponent } from './components/test-result/test-result.compon
   declarations: [
     AppComponent,
     ResultSinglePageComponent,
-    TestResultComponent
+    TestResultComponent,
+    QuestionStatsComponent,
+    ArraySortPipe,
   ],
   bootstrap: [AppComponent]
 })

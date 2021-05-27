@@ -2,22 +2,25 @@
   <h1>
     Welcome to Admin!
   </h1>
+  <div>
+    <a routerLink="question-stats">Navigate to question stats</a>
+  </div>
 </div>
 <div>
   <table border="1px" *ngIf="testResult" align="center">
     <thead>
     <tr>
-      <th>Deny</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>email</th>
-      <th>duration</th>
-      <th>result</th>
+      <th (click)="setSortValue('isRejected')">Deny</th>
+      <th (click)="setSortValue('firstName')">First name</th>
+      <th (click)="setSortValue('lastName')">Last name</th>
+      <th (click)="setSortValue('email')">email</th>
+      <th (click)="setSortValue('duration')">duration</th>
+      <th (click)="setSortValue('userAllRightAnswers')">result</th>
       <th>View</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let result of testResult"
+    <tr *ngFor="let result of testResult | sort: this.sortValue"
         [style.backgroundColor]="result.testResult.userAllRightAnswers >= 33 ? '#15CB15' : '#FD3434'"
         [style.opacity]="!!checkbox[result.testResult.userId]? 0.4: 1"
     >
@@ -25,7 +28,7 @@
       <td>{{result.user.firstName}}</td>
       <td>{{result.user.lastName}}</td>
       <td>{{result.user.email}}</td>
-      <td>{{((result.testResult.endDate - result.testResult.startDate) / 60000) | number: '1.1-1'}}</td>
+      <td>{{result.testResult.duration}}</td>
       <td>{{result.testResult.userAllRightAnswers}} of {{result.testResult.questionCount}}</td>
       <td><a [routerLink]="['test-result', result.testResult.userId]">View</a></td>
     </tr>
