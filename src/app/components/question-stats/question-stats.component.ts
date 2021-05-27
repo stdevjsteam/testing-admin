@@ -11,6 +11,7 @@ export class QuestionStatsComponent implements OnInit {
   userTestResult;
   internUsers;
   questionStats = [];
+  questions = [];
 
   constructor(private userService: UserService,
               private router: Router,
@@ -31,11 +32,17 @@ export class QuestionStatsComponent implements OnInit {
 
   private setQuestionStats(): void {
     if (this.userTestResult) {
-      for (const item in this.userTestResult) {
-        const currentUser = this.userTestResult[item];
-        for(const question of currentUser.userQuestionAnswers) {
-          if(question.rightAnswer === question.userAnswer) {
-            if(typeof this.questionStats[question.id - 1] === 'number') {
+      const values: {
+        userQuestionAnswers: {
+          question: string,
+          rightAnswer: number,
+          userAnswer: number,
+          id: number
+        }[], }[] = Object.values(this.userTestResult);
+      for (const value of values) {
+        for (const question of value.userQuestionAnswers) {
+          if (question.rightAnswer === question.userAnswer) {
+            if (typeof this.questionStats[question.id - 1] === 'number') {
               this.questionStats[question.id - 1] += 1;
             } else {
               this.questionStats[question.id - 1] = 0;
@@ -43,9 +50,15 @@ export class QuestionStatsComponent implements OnInit {
           }
         }
       }
+      for (const question of values[0].userQuestionAnswers) {
+        this.questions.push(question.question);
+      }
       const countOfContestants = Object.keys(this.userTestResult).length;
-      for(let i = 0; i < this.questionStats.length; ++i) {
-        this.questionStats[i] = this.questionStats[i] * 100 / countOfContestants;
+      for (let i = 0; i < this.questionStats.length; ++i) {
+        this.questionStats[i] = {
+          percentage: this.questionStats[i] * 100 / countOfContestants,
+          question: this.questions[i]
+        };
       }
     }
   }

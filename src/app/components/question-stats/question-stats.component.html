@@ -5,6 +5,7 @@
   <table border="1px" *ngIf="questionStats" align="center">
     <thead>
     <tr>
+      <th>#</th>
       <th>Question</th>
       <th>Percentage</th>
     </tr>
@@ -24,7 +25,8 @@
 <!--    </tr>-->
     <tr *ngFor="let stat of questionStats; let i = index">
       <td>{{i + 1}}</td>
-      <td>{{stat | number: '1.1-1'}}%</td>
+      <td>{{stat.question}}</td>
+      <td>{{stat.percentage | number: '1.1-1'}}%</td>
     </tr>
     </tbody>
   </table>
