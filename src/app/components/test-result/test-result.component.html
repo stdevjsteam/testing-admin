@@ -10,7 +10,7 @@
   <table border="1px" *ngIf="testResult" align="center">
     <thead>
     <tr>
-      <th (click)="setSortValue('isRejected')">Deny</th>
+      <th (click)="setSortValue('isRejected')">Interviewed</th>
       <th (click)="setSortValue('firstName')">First name</th>
       <th (click)="setSortValue('lastName')">Last name</th>
       <th (click)="setSortValue('email')">email</th>
@@ -21,10 +21,11 @@
     </thead>
     <tbody>
     <tr *ngFor="let result of testResult | sort: this.sortValue"
-        [style.backgroundColor]="result.testResult.userAllRightAnswers >= 33 ? '#15CB15' : '#FD3434'"
+        [style.backgroundColor]="result.testResult.userAllRightAnswers >= 30 ? '#15CB15' : '#FD3434'"
         [style.opacity]="!!checkbox[result.testResult.userId]? 0.4: 1"
     >
-      <td><input type="checkbox" [checked]="!!checkbox[result.testResult.userId]" (change)="onCheckClicked(result.testResult.userId,$event)"/></td>
+      <td><input style="margin-left: 32px;" type="checkbox" [checked]="!!checkbox[result.testResult.userId]"
+                 (change)="onCheckClicked(result.testResult.userId,$event)"/></td>
       <td>{{result.user.firstName}}</td>
       <td>{{result.user.lastName}}</td>
       <td>{{result.user.email}}</td>
